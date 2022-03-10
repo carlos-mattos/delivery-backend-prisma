@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import CreateClientUseCase from "./CreateClient";
+import CreateClientUseCase from "./CreateClientUseCase";
 
 export default class CreateClientController {
   async handle(request: Request, response: Response): Promise<Response> {
