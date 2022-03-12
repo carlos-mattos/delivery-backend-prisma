@@ -8,6 +8,7 @@ import FindAllDeliveriesController from './modules/clients/useCases/deliveries/F
 import CreateDeliveryController from "./modules/deliveries/useCases/createDelivery/CreateDeliveryController";
 import FindAllAvailableController from './modules/deliveries/useCases/findAllWithoutEndDate/FindAllAvailableController';
 import UpdateDeliveryManController from './modules/deliveries/useCases/updateDeliveryMan/UpdateDeliveryManController';
+import UpdateEndDateController from './modules/deliveries/useCases/updateEndDate/UpdateEndDateController';
 import CreateDeliverymanController from "./modules/deliveryman/useCases/createDeliveryman/CreateDeliverymanController";
 import FindAllDeliveriesDeliverymanController from './modules/deliveryman/useCases/findAllDeliveries/FIndAllDeliveriesDeliverymanController';
 
@@ -23,6 +24,7 @@ const findAllAvailableController = new FindAllAvailableController()
 const updateDeliveryManController = new UpdateDeliveryManController();
 const findAllDeliveriesController = new FindAllDeliveriesController()
 const findAllDeliveriesDeliverymanController = new FindAllDeliveriesDeliverymanController()
+const updateEndDateController = new UpdateEndDateController()
 
 routes.post("/client/auth", authenticateClientController.handle);
 routes.post("/deliveryman/auth", authenticateDeliverymanController.handle);
@@ -35,8 +37,9 @@ routes.post(
   createDeliveryController.handle
 );
 routes.get("/delivery", ensureAuthenticateDeliveryman, findAllAvailableController.handle)
-routes.put("/delivery/:id_delivery", ensureAuthenticateDeliveryman, updateDeliveryManController.handle)
+routes.put("/delivery/updateDeliveryman/:id_delivery", ensureAuthenticateDeliveryman, updateDeliveryManController.handle)
 routes.get("/client/deliveries", ensureAuthenticateClient, findAllDeliveriesController.handle)
 routes.get("/deliveryman/deliveries", ensureAuthenticateDeliveryman, findAllDeliveriesDeliverymanController.handle)
+routes.put("/delivery/updateEndDate/:id_delivery", ensureAuthenticateDeliveryman, updateEndDateController.handle)
 
 export default routes;
