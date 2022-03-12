@@ -4,6 +4,7 @@ import ensureAuthenticateDeliveryman from './middlewares/ensureAuthenticateDeliv
 import AuthenticateClientController from "./modules/account/useCases/authenticateClient/AuthenticateClientController";
 import AuthenticateDeliverymanController from "./modules/account/useCases/authenticateDeliveryman/AuthenticateDeliverymanController";
 import CreateClientController from "./modules/clients/useCases/createClient/CreateClientController";
+import FindAllDeliveriesController from './modules/clients/useCases/deliveries/FindAllDeliveriesController';
 import CreateDeliveryController from "./modules/deliveries/useCases/createDelivery/CreateDeliveryController";
 import FindAllAvailableController from './modules/deliveries/useCases/findAllWithoutEndDate/FindAllAvailableController';
 import UpdateDeliveryManController from './modules/deliveries/useCases/updateDeliveryMan/UpdateDeliveryManController';
@@ -19,6 +20,7 @@ const createDeliverymanController = new CreateDeliverymanController();
 const createDeliveryController = new CreateDeliveryController();
 const findAllAvailableController = new FindAllAvailableController()
 const updateDeliveryManController = new UpdateDeliveryManController();
+const findAllDeliveriesController = new FindAllDeliveriesController()
 
 routes.post("/client/auth", authenticateClientController.handle);
 routes.post("/deliveryman/auth", authenticateDeliverymanController.handle);
@@ -32,5 +34,6 @@ routes.post(
 );
 routes.get("/delivery", ensureAuthenticateDeliveryman, findAllAvailableController.handle)
 routes.put("/delivery/:id_delivery", ensureAuthenticateDeliveryman, updateDeliveryManController.handle)
+routes.get("/client/deliveries", ensureAuthenticateClient, findAllDeliveriesController.handle)
 
 export default routes;
